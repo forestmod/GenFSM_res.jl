@@ -61,8 +61,8 @@ jobs:
       - run: |
           julia --project=docs -e '
             using Documenter: doctest
-            using MrFOR_resource     # change MyAwesomePackage to the name of your package
-            doctest(MrFor_resource)' # change MyAwesomePackage to the name of your package
+            using MrFOR_resources     # change MyAwesomePackage to the name of your package
+            doctest(MrFor_resources)' # change MyAwesomePackage to the name of your package
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

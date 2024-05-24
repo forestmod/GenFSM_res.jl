@@ -1,20 +1,20 @@
-# The MrFOR_resources Module
+# The GenFSM_resources Module
 
 
 ```@docs
-MrFOR_resources
+GenFSM_resources
 ```
 
 ## Module Index
 
 ```@index
-Modules = [MrFOR_resources]
+Modules = [GenFSM_resources]
 Order   = [:constant, :type, :function, :macro]
 ```
 ## Detailed API
 
 ```@autodocs
-Modules = [MrFOR_resources]
+Modules = [GenFSM_resources]
 Order   = [:constant, :type, :function, :macro]
 ```
 

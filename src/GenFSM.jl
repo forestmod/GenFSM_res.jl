@@ -1,6 +1,6 @@
-module MrFOR_resources
+module GenFSM_resources
 
 greet() = print("Hello World!")
 include("Pixel.jl")
 
-end # module MrFOR_resources
+end # module GenFSM_resources

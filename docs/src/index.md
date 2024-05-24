@@ -1,3 +1,3 @@
-# MrFOR_resources.jl
+# GenFSM_resources.jl
 
-Documentation for [MrFOR_resources.jl](https://github.com/ecoformod/MrFOR_resources.jl/)
+Documentation for [GenFSM_resources.jl](https://github.com/forestmod/GenFSM_resources.jl/)

@@ -2,3 +2,6 @@ name = "GenFSM_resources"
 uuid = "731fd045-8cb1-4036-8c04-a2a477f3265a"
 authors = ["Antonello Lobianco <antonello@lobianco.org>"]
 version = "0.1.0"
+
+[deps]
+Rasters = "a3a2b9e3-a471-40c9-b274-f788e487c689"

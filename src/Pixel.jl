@@ -8,9 +8,11 @@ mutable struct Pixel
     farea::Array{Float64,2} # Forest Area, ha, by ft,dc
     ac::Array{Float64,1}    # Availability coefficient, ∈ [0,1] by ft
     # Fixed pixel characteristics
-    fixed_state::Array{Float64,1} # Encoded characteristics of the pixel (soil, position, geomorphology...)
+    fixed_state::Array{Float64,1} # Encoded characteristics of the pixel (soil, position, geomorphology...). These are assumed not to change in the timeframe of the simulation, even if we change FT that may have an effect on soil
     # Time variable characteristics
     var_state::Array{Float64,1} # Encoded characteristics of the pixel that by scenario and/or time depends (climate...)
+    # Add here some sort of soil degradation that effect depends on the harvesting multiplied by a coefficient of "good vs bad" harvesting. Good harvesting is more expensive but lead to less degradation. 
+
     # Initialized by at least one module TODO: maybe unneeded just set initialization_model to 0
     initialized::Bool
     # Initialization model id. It defines the ML model for growth and mortality
@@ -23,15 +25,19 @@ end
 """
     make_raster_mask
 
-Note the different layout between the raster object and the underlying matrix data:
+Create a raster mask of the overall region under study
 
-`
+Note the different layout between the raster geographial representation and the underlying matrix data:
+
+```
 Matrix:      Raster:
-1 5          5 6 7 8
-2 6    ==>   1 2 3 4
+1 5          1 2 3 4
+2 6    ==>   5 6 7 8
 3 7
 4 8
-`
+```
+
+So, when you take raster[2,1] you are taking the raster x=2 (from left), y=1(from top), that is 2 in this example.
 """
 
 function make_raster_mask(region)
@@ -43,16 +49,24 @@ function make_raster_mask(region)
     xres = region["xres"]
     yres = region["yres"]
     lon, lat = Rasters.X(x_lb:xres:x_ub), Rasters.Y(y_lb:yres:y_ub)
-    #crs = convert(Rasters.WellKnownText, Rasters.EPSG(cres_epsg_id)) # dosn't work now, perhaps it needs Proj.jl
-    crs = Rasters.EPSG(cres_epsg_id)
+    crs = convert(Rasters.WellKnownText, Rasters.EPSG(cres_epsg_id)) # dosn't work now, perhaps it needs Proj.jl
+    #crs = Rasters.EPSG(cres_epsg_id)
     ras = Rasters.Raster(zeros(lon, lat),crs=crs)
+    nlon = length(lon)
+    nlat = length(lat)
+    v = reshape(1:nlon*nlat,nlon,nlat)
+    ras = Rasters.Raster(v,dims=(lon,lat),crs=crs) # todo, temporary to check the mask
+    ras = Rasters.reverse(ras;dims=Rasters.Y )
+    ras[:,:] = v
     return ras
 end
 
 """
    make_pixels(nft,ndc,nx,ny)
 
-Return an array of uninstantiated pixels
+Return an array of uninstantiated pixels.
+
+Note that we follow here the geo standard, so pixels[2,1] is pixel x=2 (from left), y=1 (from nord)
 
 """
 function make_pixels(nft,ndc,nx,ny)

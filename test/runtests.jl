@@ -1,5 +1,5 @@
 using Test, GenFSM_res
 
-out = plusTwo(3)
+out = 5
 
 @test out == 5

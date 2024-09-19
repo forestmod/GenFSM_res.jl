@@ -1,4 +1,4 @@
-using Test, GenFSM_resources
+using Test, GenFSM_res
 
 out = plusTwo(3)
 

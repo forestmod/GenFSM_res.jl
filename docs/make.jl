@@ -1,8 +1,8 @@
 using Documenter
-using GenFSM_resources
+using GenFSM_res
 
 push!(LOAD_PATH,"../src/")
-makedocs(sitename="GenFSM_resources.jl Documentation",
+makedocs(sitename="GenFSM_res.jl Documentation",
          pages = [
             "Index" => "index.md",
             "An other page" => "anotherPage.md",
@@ -13,6 +13,6 @@ makedocs(sitename="GenFSM_resources.jl Documentation",
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
 # for more information.
 deploydocs(
-    repo = "github.com/forestmod/GenFSM_resources.jl.git",
+    repo = "github.com/forestmod/GenFSM_res.jl.git",
     devbranch = "main"
 )

@@ -1,20 +1,20 @@
-# The GenFSM_resources Module
+# The GenFSM_res Module
 
 
 ```@docs
-GenFSM_resources
+GenFSM_res
 ```
 
 ## Module Index
 
 ```@index
-Modules = [GenFSM_resources]
+Modules = [GenFSM_res]
 Order   = [:constant, :type, :function, :macro]
 ```
 ## Detailed API
 
 ```@autodocs
-Modules = [GenFSM_resources]
+Modules = [GenFSM_res]
 Order   = [:constant, :type, :function, :macro]
 ```
 
